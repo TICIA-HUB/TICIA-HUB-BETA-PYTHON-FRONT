@@ -6,10 +6,10 @@ from app import apply_global_styles
 
 def show():
 
-    logoHub = "pages\images\hub-logo.png"
+    # logoHub = "pages\images\hub-logo.png"
 
     apply_global_styles()
-    st.image(logoHub)
+    # st.image(logoHub)
     st.header("Adicionar nova cliente")
     st.write("Insira as informações da nova cliente abaixo:")
 
@@ -87,14 +87,6 @@ def show():
             st.error("Verifique as informações inseridas")
         elif response.status_code == 500:
             st.error("Erro no servidor")
-
-        st.markdown("""
-        <style>
-                    .logo {
-                        
-                    }
-        </style>
-        """, unsafe_allow_html=True)
         
 if __name__ == "__main__":
     show()
