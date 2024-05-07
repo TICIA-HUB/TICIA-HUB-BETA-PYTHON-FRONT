@@ -8,7 +8,7 @@ def show():
     clientes = requests.get("https://ticiahub-6e8cd092033f.herokuapp.com/clientes")
 
     try:
-        clientes = pd.DataFrame(clientes.json()['clientes'], columns=['_id', 'nome', 'sobrenome', 'email', 'whatsapp', 'data_nascimento', 'cep'])
+        clientes = pd.DataFrame(clientes.json()['clientes'], columns=['nome', 'sobrenome', 'email', 'whatsapp', 'data_nascimento', 'cep'])
         st.table(clientes)
     except requests.exceptions.JSONDecodeError as e:
         st.error("Erro ao carregar clientes") 
