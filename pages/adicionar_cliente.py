@@ -6,7 +6,7 @@ from app import apply_global_styles
 
 def show():
 
-    logoHub = "pages\images\hub-logo-1.0.svg"
+    logoHub = "pages\images\hub-logo.png"
 
     apply_global_styles()
     st.image(logoHub)
