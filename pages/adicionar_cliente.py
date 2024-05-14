@@ -1,21 +1,18 @@
 import streamlit as st
 import requests
 from utils.func import busca_cep
-from app import apply_global_styles
+from utils.global_style import apply_global_styles
 
+API_URL = "https://ticiahub-6e8cd092033f.herokuapp.com"
 
-def show():
-
-    # logoHub = "pages\images\hub-logo.png"
-
+def show(token):
     apply_global_styles()
-    # st.image(logoHub)
     st.header("Adicionar nova cliente")
     st.write("Insira as informações da nova cliente abaixo:")
 
     with st.form("form_add_cliente"):
         nome_input = st.text_input("Nome")
-        nome = nome_input.title() # Verifica se o nome está capitalizado
+        nome = nome_input.title()  # Verifica se o nome está capitalizado
 
         sobrenome_input = st.text_input("Sobrenome")
         sobrenome = sobrenome_input.title()  # Verifica se o sobrenome está capitalizado
@@ -58,11 +55,10 @@ def show():
             cep = '00000000'
             rua = 'null'
             bairro = 'null'
-        
+
         if numero == '':
             numero = 'null'
-        
-        
+
         if complemento == '':
             complemento = 'null'
 
@@ -79,14 +75,17 @@ def show():
             'complemento': complemento
         }
 
-        
-        response = requests.post("https://ticiahub-6e8cd092033f.herokuapp.com/cliente_add", json=info)
-        if response.status_code == 201:
+        headers = {"Authorization": f"Bearer {token}"}
+        response = requests.post(f"{API_URL}/cliente_add", json=info, headers=headers)
+
+        if response.status_code == 200:
             st.success("Cliente adicionado com sucesso!")
         elif response.status_code == 400:
             st.error("Verifique as informações inseridas")
         elif response.status_code == 500:
             st.error("Erro no servidor")
-        
+        else:
+            st.error(f"Erro inesperado: {response.status_code}")
+
 if __name__ == "__main__":
     show()
