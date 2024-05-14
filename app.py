@@ -23,7 +23,7 @@ def main():
     st.set_page_config(page_title="TiciaHub", page_icon=":bar_chart:", layout="wide")
     apply_global_styles()
 
-    image_path = "pages\\images\\hub-logo (3).png"
+    image_path = "pages/images/hub-logo (3).png"
     image = Image.open(image_path)
     st.image(image, width=360)
 
